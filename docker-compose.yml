@@ -28,6 +28,11 @@ services:
       - 9090
     networks:
       - monitor-net
+    extra_hosts:
+      - "freebsd:10.10.2.222"
+      - "debian:10.10.2.202"
+      - "centos:10.10.2.203"
+
     labels:
       org.label-schema.group: "monitoring"
 
@@ -85,7 +90,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:6.3.6
+    image: grafana/grafana:6.4.3
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -120,7 +125,7 @@ services:
     image: stefanprodan/caddy
     container_name: caddy
     ports:
-      - "3000:3000"
+      - "3130:3000"
       - "9090:9090"
       - "9093:9093"
       - "9091:9091"
@@ -134,3 +139,4 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+
